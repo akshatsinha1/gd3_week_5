@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class playerController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class playerController : MonoBehaviour
     [SerializeField] Transform focalPoint;
     Vector3 startPos;
     [SerializeField] float fallLimit;
+    public int lives = 3;
+    public TMP_Text livesText;
 
     [Header("Power up Data")]
     public bool hasRepelPower;
@@ -31,12 +34,7 @@ public class playerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         Vector2 moveDirection = new Vector3(horizontalInput, verticalInput).normalized;
 
-        //rb.AddForce(focalPoint.forward * speed * moveDirection.y);
-        //rb.AddForce(focalPoint.right * speed * moveDirection.x);
-
         rb.AddForce((focalPoint.forward * moveDirection.y + focalPoint.right * moveDirection.x) * speed);
-
-        //rb.AddForce(moveDirection * speed);
 
         if(transform.position.y < fallLimit)
         {
@@ -44,7 +42,11 @@ public class playerController : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
             rb.velocity = Vector3.zero;
             hasRepelPower = false;
+            lives--;
         }
+
+        livesText.text = "Lives : " + lives.ToString();
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
