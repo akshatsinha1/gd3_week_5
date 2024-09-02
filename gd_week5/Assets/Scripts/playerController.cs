@@ -20,6 +20,8 @@ public class playerController : MonoBehaviour
     public float repelForce;
     public GameObject repelIndicator;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,7 @@ public class playerController : MonoBehaviour
     {
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
-        Vector2 moveDirection = new Vector3(horizontalInput, verticalInput).normalized;
+        Vector2 moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
 
         rb.AddForce((focalPoint.forward * moveDirection.y + focalPoint.right * moveDirection.x) * speed);
 
@@ -67,8 +69,6 @@ public class playerController : MonoBehaviour
         } 
     }
 
-   
-
     private void OnCollisionEnter(Collision collision)
     {
         if (hasRepelPower && collision.transform.CompareTag("Enemy"))
@@ -77,7 +77,6 @@ public class playerController : MonoBehaviour
             enemyRb.AddForce((collision.transform.position - transform.position).normalized * repelForce, ForceMode.Impulse);
         }
     }
-
 
     IEnumerator PowerCooldown(float waitTime)
     {

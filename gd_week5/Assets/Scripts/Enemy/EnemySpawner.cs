@@ -15,9 +15,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        spawn(enemy,waveNumber);
-        
+        spawn(enemy,waveNumber);  
     }
 
     // Update is called once per frame
@@ -29,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
         {
             spawn(enemy, waveNumber);
 
-            int powerUpProbability = Random.Range(0, 3);
+            int powerUpProbability = Random.Range(1, 3);
             if(powerUpProbability % 2 == 0) spawn(powerup, 1);
 
             waveNumber++;
